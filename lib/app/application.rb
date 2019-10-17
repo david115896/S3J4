@@ -24,9 +24,10 @@ class Application
 			while @next_party!= "y" && @next_party!= "n"
 				puts"Je n'ai pas compris votre choix. Merci de repondre y ou n. ".red
 	                        print ">> "
-        	                @next_party = gets_chomp
+				@next_party = gets.chomp
                 	end
 		end
+		puts "Merci d'avoir joue, c'etait un plaisir de vous divertir!"
 	end
 
 	def new_players
