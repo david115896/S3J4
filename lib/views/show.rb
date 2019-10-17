@@ -70,8 +70,22 @@ class Show
                                         print (" ").center(15)
                                 end
                         end
-                        puts "|"		#on ferme le tableau et on passe a la prochaine ligne
-                        space_circle = 4	#les formes x et O sont symetriques en horizontale et l'espace entre les # est gere par 2 variables
+                        #puts "|"		#on ferme le tableau et on passe a la prochaine ligne
+                        if line == 0
+                                print "|"
+                                puts "/\\".center(12)
+			elsif line ==1
+				print "|" 
+				puts "|  _ \\".center(12)
+			else
+                                print "|"
+				puts "./ ____|".center(12)
+                        end
+
+			
+			
+			
+			space_circle = 4	#les formes x et O sont symetriques en horizontale et l'espace entre les # est gere par 2 variables
                         space_cross = 7
                         1.upto(2).each do |y|	#on boucle sur la moitie de la forme
                                 new_line.each do |letter|	#on boucle sur chaque case de la ligne 
@@ -82,15 +96,40 @@ class Show
                                                 print ("#" + " "*(space_cross) + "#").center(15)
                                         else
                                                 print (" ").center(15)
-                                        end
+                                        end			
                                 end
                                 y<2? space_circle += 2 : space_circle
                                 space_cross -= 4
+			
+			if line == 0
+                        	if y == 1
+                                	print "|"
+					puts "/  \\".center(12)
+                                else
+					print "|"
+					puts "/ /\\ \\".center(12)
+				end
+			elsif line == 1
+				if y == 1
+					print "|"
+                                        puts " | |_) |".center(12)
+				else
+					print "|"
+					puts " |  _ <".center(12)
+				end
+			else
+				if y == 1
+					print "|"
+					puts "| |   ".center(12)
+				else
+					print "|"
+					puts "| |   ".center(12)
+				end
+			end
 
-                                puts "|"
-                        end	
-
-                        1.upto(2).each do |y| 	#on passe a l'autre moyen des formes
+			end                        	
+			
+                        1.upto(2).each do |y| 	#on passe a l'autre moitie des formes
                                 space_cross += 4
                                 new_line.each do |letter|
                                         print "|"
@@ -102,8 +141,35 @@ class Show
                                                 print (" ").center(15)
                                         end
                                 end
+
                         space_circle -= 2
-                        puts "|"
+                        if line == 0
+                                if y == 1
+                                        print "|"
+                                        puts "/ ____ \\".center(12)
+                                else
+                                        print "|"
+                                        puts "/_/    \\_\\".center(12)
+                                end
+                        elsif line == 1
+                                if y == 1
+                                        print "|"
+                                        puts " | |_) |".center(12)
+                                else
+                                        print "|"
+                                        puts "|____/" .center(12)
+                                end
+                        else
+                                if y == 1
+                                        print "|"
+                                        puts " | |____".center(12)
+                                else
+                                        print "|"
+					puts "  .\\_____|".center(12)
+                                end
+                        end
+
+                        
                         end
                         new_line.each do |letter|	#on fini par la derniere ligne de la case
                                 print "|"
@@ -116,9 +182,19 @@ class Show
                                 end
                         end
                         puts "|"
-                        puts "-" * 49 #enfin on fait la derniere ligne du tableau
-                        end
-                end
+                        if line == 0		
+				print "-" * 49
+				puts "____".center(12) 
+
+			elsif line == 1
+				print "-" * 49
+				puts "______".rjust(10)
+			else
+				puts "-" * 49 #enfin on fait la derniere ligne du tableau
+
+			end
+		end
+	end
 
 
 end
