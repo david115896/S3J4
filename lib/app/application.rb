@@ -7,26 +7,15 @@ require 'app/game'
 require 'views/boardcase'
 
 class Application
-	attr_accessor :number_of_parties, :num_round, :board_game_instance, :player_1, :player_2
+	attr_accessor :player_1, :player_2
 	
 	def initialize
-
-		#@board_game_instance = Board.new()
 		new_players
-		@num_round = 0
 	end
 
 	def perform
 		welcome
 		Game.new(@player_1,@player_2).perform 
-				
-		#@board_game_instance.board_game
-		#while game_finished? == false && there_is_a_winner == false
-		#Application.new(@player_1,  @player_2, @board_game_instance).perform
-		#@number_of_parties += 1
-		
-		#end
-
 	end
 
 	def new_players
@@ -49,7 +38,6 @@ class Application
                 print "ok ?"
                 gets
                 system( "clear")
-        	return player_1, player_2
 	end
 	
 	def welcome
@@ -71,7 +59,5 @@ class Application
 		print "-"*62
 		puts ""
 	end
-
-
 end
 
