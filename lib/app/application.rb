@@ -11,15 +11,16 @@ class Application
 	
 	def initialize
 		new_players
-		@next_party ="n"
+		@next_party ="y"
 	end
 
 	def perform
-		while @next_party == "n"
+		while @next_party == "y"
 			Game.new(@player_1,@player_2).perform
 		        
 			puts "Souhaitez vous refaire une partie ? y/n".yellow
-             		@next_party = gets.chomp
+             		print ">> "
+			@next_party = gets.chomp
 			while @next_party!= "y" && @next_party!= "n"
 				puts"Je n'ai pas compris votre choix. Merci de repondre y ou n. ".red
 	                        print ">> "
