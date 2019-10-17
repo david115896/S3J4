@@ -3,6 +3,7 @@ Bundler.require
 $:.unshift File.expand_path('./../lib', __FILE__)
 require 'views/boardcase'
 require 'views/show'
+require 'app/player'
 
 class Board
 	attr_accessor :board_case_name_array, :num_round, :show_instance
@@ -38,8 +39,23 @@ class Board
 	
 	def board_show_draw
 		@show_instance.live_board
-		puts "Dommage aucun de vous n'a gagne ....."
-		puts "Vous voulez retenter votre chance ?	"
+		puts "Dommage ! Aucun de vous n'a gagne .....".red
+	
+	end
+	
+	def show_result(player1, player2)
+		@show_instance.results(player1, player2)
+	end
+
+	def board_who_wins(num_round, player1, player2)
+		@show_instance.live_board
+		if num_round%2==0
+			player2.score += 1
+			puts "#{player2.name} gagne la manche".green
+		else
+			player1.score += 1
+			puts "#{player1.name} gagne la manche".green
+		end	
 	end
 
         def check_player_move(choosen_box)

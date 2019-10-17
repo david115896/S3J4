@@ -5,23 +5,17 @@ require 'views/board'
 require 'app/player'
 require 'views/boardcase'
 
-
-
-
 class Show
 	attr_accessor :board_case_array
 	
 	def initialize(board_game_instance)
-		@board_case_array = board_game_instance
-		
-
-		
+		@board_case_array = board_game_instance   #recupere un array avec les ID des boardcase
 	end
 	
-	def live_menu
+	def live_menu		#affiche un menu
                 puts "Choisis une case disponible du plateau"
                 num_box=1
-                @board_case_array.each do |box|
+                @board_case_array.each do |box|			#affiche seulement les cases qui sont vides
                         if box.box_value == ""
                         	puts"#{num_box} - #{box.box_name}"
                         end
@@ -29,27 +23,44 @@ class Show
                 end
                 print ">> "
         end
+	
+	def results(player1, player2)
+                puts "Voici le resultat des differentes manches :"
+                puts "-"*33
+                print "|"
+                print "#{player1.name}".center(15)
+                print "|"
+                print "#{player1.score}".center(15)
+                puts "|"
+                puts "-"*33
+                print "|"
+                print "#{player2.name}".center(15)
+                print "|"
+                print "#{player2.score}".center(15)
+                puts "|"
+                puts "-"*33
+	end
 
 	def live_board
 		system("clear")
-                puts "-" * 49
-                3.times do |line|
+                puts "-" * 49		#on ecrit la premiere ligne du tableau
+                3.times do |line|	#on construit 3 lignes pour avoir 9 case
                         new_line=[]
-                        if line == 0
-                                new_line << @board_case_array[0].box_value   #@game_hash[:"A1"]
-                                new_line << @board_case_array[1].box_value #@game_hash[:"A2"]
-                                new_line << @board_case_array[2].box_value #@game_hash[:"A3"]
+                        if line == 0	#chaque ligne va etre remplie selon les valeurs des instances boardcase
+                                new_line << @board_case_array[0].box_value
+                                new_line << @board_case_array[1].box_value
+                                new_line << @board_case_array[2].box_value
                         elsif line == 1
-                                new_line << @board_case_array[3].box_value #@game_hash[:"B1"]
-                                new_line << @board_case_array[4].box_value #@game_hash[:"B2"]
-                                new_line << @board_case_array[5].box_value #@game_hash[:"B3"]
+                                new_line << @board_case_array[3].box_value
+                                new_line << @board_case_array[4].box_value
+                                new_line << @board_case_array[5].box_value
                         else
-                                new_line << @board_case_array[6].box_value #@game_hash[:"C1"]
-                                new_line << @board_case_array[7].box_value #@game_hash[:"C2"]
-                                new_line << @board_case_array[8].box_value #@game_hash[:"C3"]
+                                new_line << @board_case_array[6].box_value
+ 				new_line << @board_case_array[7].box_value
+                                new_line << @board_case_array[8].box_value
                         end
 
-                        new_line.each do |letter|
+                        new_line.each do |letter|	#on ecrit la premier ligne de la ligne
                                 print "|"
                                 if letter == "O"
                                         print ("##").center(15)
@@ -59,15 +70,15 @@ class Show
                                         print (" ").center(15)
                                 end
                         end
-                        puts "|"
-                        space_circle = 4
+                        puts "|"		#on ferme le tableau et on passe a la prochaine ligne
+                        space_circle = 4	#les formes x et O sont symetriques en horizontale et l'espace entre les # est gere par 2 variables
                         space_cross = 7
-                        1.upto(2).each do |y|
-                                new_line.each do |letter|
+                        1.upto(2).each do |y|	#on boucle sur la moitie de la forme
+                                new_line.each do |letter|	#on boucle sur chaque case de la ligne 
 					print "|"
-                                        if letter == "O"
+                                        if letter == "O"	#si c'est O on forme un demi cercle
                                                 print ("#" + " "*(space_circle) + "#").center(15)
-                                        elsif letter == "X"
+                                        elsif letter == "X"	#si c'est x on ferme un demi x
                                                 print ("#" + " "*(space_cross) + "#").center(15)
                                         else
                                                 print (" ").center(15)
@@ -77,9 +88,9 @@ class Show
                                 space_cross -= 4
 
                                 puts "|"
-                        end
+                        end	
 
-                        1.upto(2).each do |y|
+                        1.upto(2).each do |y| 	#on passe a l'autre moyen des formes
                                 space_cross += 4
                                 new_line.each do |letter|
                                         print "|"
@@ -94,7 +105,7 @@ class Show
                         space_circle -= 2
                         puts "|"
                         end
-                        new_line.each do |letter|
+                        new_line.each do |letter|	#on fini par la derniere ligne de la case
                                 print "|"
                                 if letter == "O"
                                         print ("##").center(15)
@@ -105,7 +116,7 @@ class Show
                                 end
                         end
                         puts "|"
-                        puts "-" * 49
+                        puts "-" * 49 #enfin on fait la derniere ligne du tableau
                         end
                 end
 
